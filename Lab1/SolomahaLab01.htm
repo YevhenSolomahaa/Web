@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk"> <!-- Додано мову сторінки -->
+<head>
+    <meta charset="UTF-8">
+    <title>Моя перша Web-сторінка</title>
+    <meta name="description" content="Особиста сторінка студента. Коротка інформація про себе, моє хобі та приклад коду">
+    <meta name="keywords" content="студент, хобі, програмування, HTML, веб-розробка, JavaScript">
+    <style>
+        body {
+            background-color: #FFFFF0; /* Замість bgcolor */
+            color: #333333; /* Замість text */
+            font-family: Arial, sans-serif; /* Замість <font face> */
+            margin: 20px;
+        }
+        h1, h2, p {
+            text-align: center; /* Замість align="center" */
+        }
+        p.justify {
+            text-align: justify; /* Замість align="justify" */
+        }
+        .signature {
+            font-size: 1.2em; /* Замість <font size="4"> */
+            font-weight: bold;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Для прокрутки, якщо код дуже широкий */
+            text-align: left; /* Вирівнюємо код по лівому краю */
+            max-width: 600px; /* Обмежуємо ширину блоку з кодом */
+            margin: 0 auto; /* Центруємо блок на сторінці */
+        }
+        img {
+            display: block;
+            margin: 0 auto; /* Центруємо зображення */
+        }
+    </style>
+</head>
+<body>
+    <!-- Зображення тепер центрується за допомогою CSS -->
+    <img src="image/emblema.jpg" alt="Моя емблема" width="150"> <!-- Додано width для контролю розміру -->
+
+    <h1>Про себе</h1>
+    <p class="justify">
+        Мене звати Євген. Я студент <b><i>комп'ютерних наук</i></b> цікавлюсь сучасними технологіями. Завжди прагну до саморозвитку та вивчення нового, особливо в сфері IT. Вважаю, що <u>наполегливість</u> та <u>цілеспрямованість</u> є ключем до успіху в будь-якій справі.
+    </p>
+    <p class="justify">
+        Крім навчання, я активно шукаю можливості для практичного застосування своїх знань, будь то невеликі власні проекти чи участь у групових завданнях. Мені подобається <b><i>спілкуватися з людьми </i></b> та допомагати їм.
+    </p>
+
+    <h1>Моє хобі</h1>
+    <p class="justify">
+        Моїм основним захопленням є <b><i>прослуховування музики</i></b>. Мені подобається процес створення чогось нового. Також я цікавлюсь фотографією та люблю проводити час на свіжому повітрі, граючи у волейбол чи подорожуючи.
+    </p>
+
+    <h2>Програмування</h2>
+    <pre>
+<code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Це приклад простої програми на C++
+    int number;
+
+    cout &lt;&lt; "Введіть число: ";
+    cin &gt;&gt; number;
+
+    if (number % 2 == 0) {
+        cout &lt;&lt; number &lt;&lt; " - парне число." &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; number &lt;&lt; " - непарне число." &lt;&lt; endl;
+    }
+
+    return 0;
+}</code>
+    </pre>
+
+    <p class="signature">
+        Студент групи 301-ТН Соломаха Є.Р.
+    </p>
+
+</body>
+</html>
