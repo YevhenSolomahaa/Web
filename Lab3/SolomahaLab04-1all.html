@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №4 - Усі завдання</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1, h2 { 
+            text-align: center; 
+            color: #333;
+        }
+        .task { 
+            background: white; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav { 
+            text-align: center; 
+            margin: 20px 0;
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            margin: 0 15px;
+            padding: 5px 10px;
+        }
+        nav a:hover { 
+            background: #555; 
+            border-radius: 3px;
+        }
+        marquee { 
+            margin: 10px 0;
+        }
+        .vertical-marquee-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .vertical-marquee {
+            width: 150px;
+            height: 120px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Лабораторна робота №4</h1>
+    <h2>Використання рядків, що біжать</h2>
+
+    <nav>
+        <a href="#task1">Завдання 1</a>
+        <a href="#task4-1">Завдання 4.1</a>
+        <a href="#task4-2">Завдання 4.2</a>
+    </nav>
+
+    <!-- Завдання 1 -->
+    <div id="task1" class="task">
+        <h2>Завдання 1: Базовий рядок, що біжить</h2>
+        <div align="center">
+            <marquee width="800" bgcolor="#99ff00" height="50" behavior="alternate">
+                <font color="#8b008b" face="Verdana" size="4">
+                    <b><i>ПРИКЛАД РЯДКА, ЩО БІЖИТЬ (коливання)</i></b>
+                </font>
+            </marquee>
+        </div>
+    </div>
+
+    <!-- Завдання 4.1 -->
+    <div id="task4-1" class="task">
+        <h2>Завдання 4.1: П'ять горизонтальних рядків</h2>
+        
+        <!-- 1. Коливання -->
+        <marquee behavior="alternate" bgcolor="#FFB6C1" height="30" scrollamount="5">
+            <font face="Arial" size="3" color="#8B0000">
+                <b>1. Цей текст коливається з боку в бік (alternate)</b>
+            </font>
+        </marquee>
+
+        <!-- 2. Безкінечний рух зліва направо -->
+        <marquee behavior="scroll" direction="right" bgcolor="#98FB98" height="30" scrollamount="4">
+            <font face="Verdana" size="3" color="#006400">
+                <b>2. Текст біжить зліва направо і повторюється (scroll)</b>
+            </font>
+        </marquee>
+
+        <!-- 3. Рух праворуч і зупинка -->
+        <marquee behavior="slide" direction="right" bgcolor="#ADD8E6" height="30" scrollamount="3">
+            <font face="Courier" size="3" color="#000080">
+                <b>3. Текст біжить праворуч і зупиняється (slide)</b>
+            </font>
+        </marquee>
+
+        <!-- 4. Швидкий рух -->
+        <marquee behavior="scroll" direction="left" bgcolor="#FFD700" height="30" scrolldelay="50" scrollamount="10">
+            <font face="Tahoma" size="3" color="#8B4513">
+                <b>4. Швидкий текст з затримкою 50 мс</b>
+            </font>
+        </marquee>
+
+        <!-- 5. Повільний рух -->
+        <marquee behavior="scroll" direction="left" bgcolor="#DDA0DD" height="30" scrolldelay="200" scrollamount="3">
+            <font face="Georgia" size="3" color="#4B0082">
+                <b>5. Повільний текст з затримкою 200 мс</b>
+            </font>
+        </marquee>
+    </div>
+
+    <!-- Завдання 4.2 -->
+    <div id="task4-2" class="task">
+        <h2>Завдання 4.2: П'ять вертикальних рядків</h2>
+        
+        <div class="vertical-marquee-container">
+            <!-- 1. Коливання вгору-вниз -->
+            <div class="vertical-marquee">
+                <marquee behavior="alternate" direction="up" bgcolor="#FFE4E1" width="150" height="120" scrollamount="3">
+                    <font face="Arial" size="2" color="#DC143C">
+                        <b>1. Текст коливається вгору-вниз</b>
+                    </font>
+                </marquee>
+            </div>
+
+            <!-- 2. Безкінечний рух вгору -->
+            <div class="vertical-marquee">
+                <marquee behavior="scroll" direction="up" bgcolor="#E0FFFF" width="150" height="120" scrollamount="2">
+                    <font face="Verdana" size="2" color="#2F4F4F">
+                        <b>2. Текст рухається вгору без зупинки</b><br>
+                        <br>
+                       
+                    </font>
+                </marquee>
+            </div>
+
+            <!-- 3. Рух вниз і зупинка -->
+            <div class="vertical-marquee">
+                <marquee behavior="slide" direction="down" bgcolor="#F0FFF0" width="150" height="120" scrollamount="4">
+                    <font face="Courier" size="2" color="#228B22">
+                        <b>3. Текст рухається вниз і зупиняється</b><br>
+                        <br>
+                    </font>
+                </marquee>
+            </div>
+
+            <!-- 4. Швидкий рух вгору -->
+            <div class="vertical-marquee">
+                <marquee behavior="scroll" direction="up" bgcolor="#FFFACD" width="150" height="120" scrolldelay="40" scrollamount="8">
+                    <font face="Tahoma" size="2" color="#B8860B">
+                        <b>4. Швидкий рух вгору (затримка 40 мс)</b>
+                    </font>
+                </marquee>
+            </div>
+
+            <!-- 5. Повільний рух вниз -->
+            <div class="vertical-marquee">
+                <marquee behavior="scroll" direction="down" bgcolor="#F5F5DC" width="150" height="120" scrolldelay="150" scrollamount="2">
+                    <font face="Georgia" size="2" color="#8B4513">
+                        <b>5. Повільний рух вниз (затримка 150 мс)</b>
+                    </font>
+                </marquee>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; color: #666;">
+        <p>Студент: Соломаха Є.Р | Група: 301 - ТН</p>
+    </div>
+
+</body>
+</html>
