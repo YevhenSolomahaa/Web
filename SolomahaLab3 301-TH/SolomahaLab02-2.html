@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <title>Документ з фоновим зображенням</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-image: url("image/fon_grupy.jpg");
+            color: #330066;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .content-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+        .title {
+            color: #008080;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.8em;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        .clock {
+            max-width: 200px;
+            margin: 0 auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 5px solid #008080;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        <div class="title">Розклад</div>
+        <div class="subtitle">занять на вівторок</div>
+        <img src="image/clock.jpg" alt="Годинник" class="clock">
+    </div>
+</body>
+</html>
