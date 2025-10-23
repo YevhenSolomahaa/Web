@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №7 - Завдання 2</title>
+</head>
+<body>
+    <h2>Форма з усіма типами елементів</h2>
+    
+    <form action="result.html" method="post">
+        <!-- TEXT поле -->
+        <p>
+            <label>Текстове поле (TEXT):</label><br>
+            <input type="text" name="username" value="Іваненко Іван" size="30" maxlength="50">
+        </p>
+
+        <!-- PASSWORD поле -->
+        <p>
+            <label>Поле пароля (PASSWORD):</label><br>
+            <input type="password" name="userpassword" size="20" maxlength="20">
+        </p>
+
+        <!-- TEXTAREA -->
+        <p>
+            <label>Текстова область (TEXTAREA):</label><br>
+            <textarea name="comments" cols="40" rows="4" wrap="virtual">Введіть ваші коментарі тут...</textarea>
+        </p>
+
+        <!-- SELECT з одиночним вибором -->
+        <p>
+            <label>Список з одиночним вибором (SELECT):</label><br>
+            <select name="city" size="1">
+                <option value="kyiv">Київ</option>
+                <option value="lviv">Львів</option>
+                <option value="kharkiv">Харків</option>
+                <option value="odesa">Одеса</option>
+                <option value="dnipro">Дніпро</option>
+            </select>
+        </p>
+
+        <!-- SELECT з множинним вибором -->
+        <p>
+            <label>Список з множинним вибором (SELECT multiple):</label><br>
+            <select name="hobbies" size="3" multiple>
+                <option value="sport">Спорт</option>
+                <option value="music">Музика</option>
+                <option value="reading">Читання</option>
+                <option value="travel">Подорожі</option>
+                <option value="programming">Програмування</option>
+            </select>
+        </p>
+
+        <!-- CHECKBOX -->
+        <p>
+            <label>Прапорці (CHECKBOX):</label><br>
+            <input type="checkbox" name="newsletter" value="yes" checked> Отримувати новини<br>
+            <input type="checkbox" name="agreement" value="accepted"> Я погоджуюсь з умовами
+        </p>
+
+        <!-- RADIO BUTTON -->
+        <p>
+            <label>Радіокнопки (RADIO):</label><br>
+            <input type="radio" name="gender" value="male"> Чоловік<br>
+            <input type="radio" name="gender" value="female"> Жінка<br>
+            <input type="radio" name="gender" value="other"> Інше
+        </p>
+
+        <!-- FILE -->
+        <p>
+            <label>Завантаження файлу (FILE):</label><br>
+            <input type="file" name="userfile" size="30" accept=".jpg,.png,.pdf">
+        </p>
+
+        <!-- Кнопки -->
+        <p>
+            <input type="submit" name="submitBtn" value="Надіслати форму">
+            <input type="reset" name="resetBtn" value="Очистити форму">
+            <input type="button" name="infoBtn" value="Інформація" onclick="alert('Це інформаційна кнопка!')">
+        </p>
+
+        <!-- Приховане поле -->
+        <input type="hidden" name="form_version" value="1.0">
+    </form>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Мої друзі та одногрупники</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            padding: 40px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: rgba(255,255,255,0.98);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            color: #333;
+        }
+        
+        h1 { 
+            color: #2c3e50; 
+            text-align: center; 
+            margin-bottom: 30px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #3498db;
+            text-align: center;
+            margin: 50px 0 30px 0;
+            border-bottom: 4px solid #ff6f00;
+            padding-bottom: 15px;
+            font-size: 2.2em;
+        }
+        
+        .navigation-map { 
+            text-align: center; 
+            margin: 50px 0; 
+            padding: 40px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .friends-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 35px; 
+            margin: 50px 0; 
+        }
+        
+        .friend-card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 25px; 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15); 
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .friend-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #ff6f00);
+        }
+        
+        .friend-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+            border-color: #3498db;
+        }
+        
+        .friend-photo { 
+            width: 160px; 
+            height: 160px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 6px solid #3498db;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .friend-card:hover .friend-photo {
+            transform: scale(1.1);
+            border-color: #ff6f00;
+        }
+        
+        .friend-name {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .friend-role {
+            color: #ff6f00;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            padding: 8px 16px;
+            background: #fff3e0;
+            border-radius: 25px;
+            display: inline-block;
+        }
+        
+        .friend-description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        
+        .friend-details {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .friend-details strong {
+            color: #2c3e50;
+        }
+        
+        .custom-tooltip {
+            position: fixed;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 15px 22px;
+            border-radius: 12px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 2px solid #ff6f00;
+            font-weight: bold;
+        }
+        
+        .map-instructions {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 25px;
+            text-align: center;
+            border: 2px solid #4caf50;
+        }
+        
+        .map-instructions h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .map-instructions p {
+            color: #388e3c;
+            margin: 8px 0;
+            font-size: 1.1em;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        /* Анімації */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .friend-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .friend-card:nth-child(1) { animation-delay: 0.1s; }
+        .friend-card:nth-child(2) { animation-delay: 0.2s; }
+        .friend-card:nth-child(3) { animation-delay: 0.3s; }
+        .friend-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Мої друзі та одногрупники</h1>
+        <p class="section-subtitle">Люди, які роблять моє життя яскравішим та надихають на звершення</p>
+        
+        <!-- НАВІГАЦІЙНА КАРТА ДРУЗІВ -->
+        <div class="navigation-map">
+            <h2>🗺️ Навігаційна карта друзів</h2>
+            <p style="color: #666; margin-bottom: 25px; font-size: 1.2em;">Наведіть курсор на фігури для перегляду інформації та клікайте для переходу</p>
+            
+            <map name="friendsMap">
+                <!-- КОЛО - Вікторія -->
+                <area shape="circle" coords="100,100,60" 
+                       href="#friend1"
+                       onmouseover="showTooltip(' Вікторія - найкраща подруга')"
+                       onmouseout="hideTooltip()">
+                
+                <!-- ПРЯМОКУТНИК - Олексій -->
+                <area shape="rect" coords="200,50,350,150" 
+                       href="#friend2"
+                       onmouseover="showTooltip(' Олексій - одногрупник')"
+                       onmouseout="hideTooltip()">
+                
+                <!-- ТРИКУТНИК - Святослав -->
+                <area shape="poly" coords="400,100,500,50,550,100,500,150" 
+                       href="#friend3"
+                       onmouseover="showTooltip(' Святослав - друг дитинства')"
+                       onmouseout="hideTooltip()">
+                
+                <!-- КОЛО - Антон -->
+                <area shape="circle" coords="650,100,50" 
+                       href="#friend4"
+                       onmouseover="showTooltip(' Антон - спортивний друг')"
+                       onmouseout="hideTooltip()">
+            </map>
+            
+            <img src="Foto/navigation_map.jpg" width="750" height="200" 
+                 alt="Карта друзів" usemap="#friendsMap"
+                 style="border: 4px solid #3498db; border-radius: 15px; box-shadow: 0 12px 30px rgba(0,0,0,0.2); transition: transform 0.3s ease;"
+                 onmouseover="this.style.transform='scale(1.02)'"
+                 onmouseout="this.style.transform='scale(1)'">
+            <div id="customTooltip" class="custom-tooltip"></div>
+
+            <div class="map-instructions">
+                <h3> Як користуватися картою:</h3>
+                <p>• <strong>Ліве коло</strong> - Вікторія (найкраща подруга)</p>
+                <p>• <strong>Центральний прямокутник</strong> - Олексій (одногрупник)</p>
+                <p>• <strong>Правий трикутник</strong> - Святослав (друг дитинства)</p>
+                <p>• <strong>Праве коло</strong> - Антон (спортивний друг)</p>
+            </div>
+        </div>
+
+        <!-- ІНФОРМАЦІЯ ПРО ДРУЗІВ -->
+        <h2>💫 Інформація про моїх друзів</h2>
+        <p class="section-subtitle">Кожен з них - унікальна особистість з яскравою індивідуальністю</p>
+        
+        <div class="friends-grid">
+            <!-- ДРУГ 1 - Вікторія -->
+            <div class="friend-card" id="friend1">
+                <img src="Foto/friend1.jpg" alt="Вікторія" class="friend-photo" 
+                     onerror="this.src='https://via.placeholder.com/160/FF6B6B/FFFFFF?text=+Вікторія'">
+                <div class="friend-name">Вікторія</div>
+                <div class="friend-role">🎓 Найкраща подруга</div>
+                <div class="friend-description">
+                    Знайомі з початкових класів, разом ходили в один клас. 
+                    Завжди була гарним співрозмовником з якою було про що поговорити і чудовим почуттям гумору.
+                    Надійний друг, який завжди підтримає в скрутну хвилину.
+                </div>
+                <div class="friend-details">
+                    <strong> Навчання:</strong> Дизайнер<br>
+                    <strong> Хобі:</strong> Фотографія, малювання<br>
+                    <strong> Якість:</strong> Відповідальність та творчість
+                </div>
+            </div>
+
+            <!-- ДРУГ 2 - Олексій -->
+            <div class="friend-card" id="friend2">
+                <img src="Foto/friend2.jpg" alt="Олексій" class="friend-photo"
+                     onerror="this.src='https://via.placeholder.com/160/4ECDC4/FFFFFF?text=+Олексій'">
+                <div class="friend-name">Олексій</div>
+                <div class="friend-role"> Одногрупник</div>
+                <div class="friend-description">
+                    Разом вчимося в університеті з першого курсу. 
+                    Експерт у складних технічних питаннях, завжди готовий допомогти з лабораторними роботами.
+                    Відмінно розбирається в програмуванні та математиці.
+                </div>
+                <div class="friend-details">
+                    <strong> Навчання:</strong>Комп'ютерні науки<br>
+                    <strong> Хобі:</strong> Шахмати, програмування<br>
+                    <strong> Якість:</strong> Логічне мислення і гострий розум
+                </div>
+            </div>
+
+            <!-- ДРУГ 3 - Святослав -->
+            <div class="friend-card" id="friend3">
+                <img src="Foto/friend3.jpg" alt="Святослав" class="friend-photo"
+                     onerror="this.src='https://via.placeholder.com/160/45B7D1/FFFFFF?text=+Святослав'">
+                <div class="friend-name">Святослав</div>
+                <div class="friend-role"> Друг дитинства</div>
+                <div class="friend-description">
+                    Дружимо з дитячого садка! Пройшли разом школу, а тепер і університет. 
+                    Надзвичайно здібний хлопець з чудовим почуттям гумору і гострим розумом.
+                    Завжди знає, як підняти настрій.
+                </div>
+                <div class="friend-details">
+                    <strong> Навчання:</strong> Банківська справа<br>
+                    <strong> Хобі:</strong> Футбол, подорожі, книги<br>
+                    <strong> Якість:</strong> Креативність та комунікабельність
+                </div>
+            </div>
+
+            <!-- ДРУГ 4 - Антон -->
+            <div class="friend-card" id="friend4">
+                <img src="Foto/friend4.jpg" alt="Антон" class="friend-photo"
+                     onerror="this.src='https://via.placeholder.com/160/96CEB4/FFFFFF?text=+Антон'">
+                <div class="friend-name">Антон</div>
+                <div class="friend-role"> Спортивний друг</div>
+                <div class="friend-description">
+                    Знайомі з молодшої школи, разом грали у футбол.
+                    Завжди мотивував вести здоровий спосіб життя та не здаватися.
+                    Справжній лідер і відповідальний товариш.
+                </div>
+                <div class="friend-details">
+                    <strong> Навчання:</strong> Футболіст<br>
+                    <strong> Хобі:</strong> Спорт, тренування, активний відпочинок<br>
+                    <strong> Якість:</strong> Дисципліна та цілеспрямованість
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTooltip(text) {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.style.display = 'none';
+        }
+
+        document.addEventListener('mousemove', function(event) {
+            const tooltip = document.getElementById('customTooltip');
+            if (tooltip.style.display === 'block') {
+                tooltip.style.left = (event.clientX + 25) + 'px';
+                tooltip.style.top = (event.clientY + 25) + 'px';
+            }
+        });
+
+        // Плавна прокрутка до друзів при кліку на карту
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('area[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        
+                        // Додаємо ефект підсвічування
+                        targetElement.style.animation = 'none';
+                        setTimeout(() => {
+                            targetElement.style.animation = 'fadeInUp 0.6s ease';
+                            targetElement.style.boxShadow = '0 0 30px rgba(255, 111, 0, 0.5)';
+                            setTimeout(() => {
+                                targetElement.style.boxShadow = '';
+                            }, 2000);
+                        }, 10);
+                    }
+                });
+            });
+            
+            console.log(' Сторінка друзів завантажена успішно!');
+        });
+
+        // Додаємо ефект при скролі
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.friend-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

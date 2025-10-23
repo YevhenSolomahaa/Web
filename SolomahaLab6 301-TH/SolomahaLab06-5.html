@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Сенсорне зображення - Природний пейзаж</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 40px;
+            background: #fffde7;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #e65100;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        .image-box {
+            margin: 30px 0;
+            position: relative;
+        }
+        img {
+            border: 4px solid #ff9800;
+            border-radius: 15px;
+            max-width: 100%;
+            height: auto;
+        }
+        .custom-tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 2px solid #ff9800;
+        }
+        .instructions {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .coordinate-info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Сенсорне зображення: Природний пейзаж</h1>
+        <p>Наведіть курсор на об'єкти, щоб побачити підказки</p>
+
+        <!-- КАРТА -->
+        <map name="natureMap">
+            <!-- ХМАРА -->
+            <area shape="poly" coords="120,60,180,40,220,60,200,90,140,100,100,80"
+                  href="#"
+                  onmouseover="showTooltip('Пухнаста хмара на небі ☁️')"
+                  onmouseout="hideTooltip()">
+
+            <!-- СОНЦЕ -->
+            <area shape="circle" coords="650,80,40"
+                  href="#"
+                  onmouseover="showTooltip('Захід сонця над горизонтом ☀️')"
+                  onmouseout="hideTooltip()">
+
+            <!-- ГОРИ -->
+            <area shape="poly" coords="60,300,120,220,180,200,240,240,200,300"
+                  href="#"
+                  onmouseover="showTooltip('Скелясті гори на горизонті 🏔️')"
+                  onmouseout="hideTooltip()">
+
+            <!-- ДЕРЕВО -->
+            <area shape="poly" coords="400,280,410,240,430,220,450,240,460,280,430,310"
+                  href="#"
+                  onmouseover="showTooltip('Одиноке дерево на схилі 🌳')"
+                  onmouseout="hideTooltip()">
+
+            <!-- ВОДОСПАД -->
+            <area shape="poly" coords="580,160,590,100,620,100,630,160,620,220,590,220"
+                  href="#"
+                  onmouseover="showTooltip('Високий водоспад, що спадає зі скелі 🌊')"
+                  onmouseout="hideTooltip()">
+        </map>
+
+        <!-- ЗОБРАЖЕННЯ -->
+        <div class="image-box">
+            <img src="Foto/art_image.jpg" width="700" height="400"
+                 alt="Природний пейзаж з водоспадом" usemap="#natureMap">
+            <div id="customTooltip" class="custom-tooltip"></div>
+        </div>
+
+        <!-- ІНСТРУКЦІЇ -->
+        <div class="instructions">
+            <h3>📐 Координати об'єктів:</h3>
+
+            <div class="coordinate-info">
+                <strong>Хмара:</strong> shape="poly" coords="120,60,180,40,220,60,200,90,140,100,100,80"
+            </div>
+            <div class="coordinate-info">
+                <strong>Сонце:</strong> shape="circle" coords="650,80,40"
+            </div>
+            <div class="coordinate-info">
+                <strong>Гори:</strong> shape="poly" coords="60,300,120,220,180,200,240,240,200,300"
+            </div>
+            <div class="coordinate-info">
+                <strong>Дерево:</strong> shape="poly" coords="400,280,410,240,430,220,450,240,460,280,430,310"
+            </div>
+            <div class="coordinate-info">
+                <strong>Водоспад:</strong> shape="poly" coords="580,160,590,100,620,100,630,160,620,220,590,220"
+            </div>
+
+            <h3>🎯 Що тестувати:</h3>
+            <ul>
+                <li>Наведіть на <strong>хмару</strong> (центр неба)</li>
+                <li>Наведіть на <strong>сонце</strong> (правий верхній кут)</li>
+                <li>Наведіть на <strong>гори</strong> (ліва частина)</li>
+                <li>Наведіть на <strong>дерево</strong> (центр праворуч)</li>
+                <li>Наведіть на <strong>водоспад</strong> (правий край)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showTooltip(text) {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.style.display = 'none';
+        }
+
+        document.addEventListener('mousemove', function(event) {
+            const tooltip = document.getElementById('customTooltip');
+            if (tooltip.style.display === 'block') {
+                tooltip.style.left = (event.clientX + 20) + 'px';
+                tooltip.style.top = (event.clientY + 20) + 'px';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🌄 Сенсорне зображення оновлено!');
+        });
+    </script>
+</body>
+</html>

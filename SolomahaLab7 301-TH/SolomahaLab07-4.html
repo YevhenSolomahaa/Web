@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №7 - Завдання 4</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .form-section { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; }
+        .section-title { font-weight: bold; margin-bottom: 10px; color: #333; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], textarea { width: 300px; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Форма замовлення товару</h2>
+    
+    <form action="result.html" method="post">
+        <!-- Банківська інформація -->
+        <div class="form-section">
+            <div class="section-title">Банківська інформація</div>
+            
+            <label>Номер банківського рахунку:</label>
+            <input type="text" name="account_number" required size="30" placeholder="XXXX-XXXX-XXXX-XXXX">
+            
+            <label>Особистий номер користувача:</label>
+            <input type="text" name="personal_number" required size="20" placeholder="Ваш персональний номер">
+        </div>
+
+        <!-- Вибір товарів -->
+        <div class="form-section">
+            <div class="section-title">Вибір товарів</div>
+            
+            <label>Оберіть товари (для множинного вибору утримуйте Ctrl):</label>
+            <select name="products" size="6" multiple style="width: 250px;">
+                <option value="laptop">Ноутбук ASUS - 25,000 грн</option>
+                <option value="smartphone">Смартфон Samsung - 15,000 грн</option>
+                <option value="tablet">Планшет iPad - 18,000 грн</option>
+                <option value="monitor">Монітор 24" - 7,000 грн</option>
+                <option value="keyboard">Механічна клавіатура - 2,500 грн</option>
+                <option value="mouse">Бездротова миша - 800 грн</option>
+                <option value="headphones">Навушники Sony - 3,200 грн</option>
+                <option value="printer">Принтер HP - 5,500 грн</option>
+            </select>
+        </div>
+
+        <!-- Спосіб оплати -->
+        <div class="form-section">
+            <div class="section-title">Спосіб оплати</div>
+            
+            <label>
+                <input type="radio" name="payment_type" value="cash" checked> Готівковий розрахунок
+            </label>
+            <label>
+                <input type="radio" name="payment_type" value="cashless"> Безготівковий розрахунок
+            </label>
+        </div>
+
+        <!-- Додаткова інформація -->
+        <div class="form-section">
+            <div class="section-title">Додаткова інформація</div>
+            
+            <p>Яку додаткову інформацію ви бажаєте отримати:</p>
+            <label>
+                <input type="checkbox" name="additional_info" value="balance"> Дані про залишки на рахунку
+            </label>
+            <label>
+                <input type="checkbox" name="additional_info" value="payments"> Список останніх виплат по рахунку
+            </label>
+            
+            <br><br>
+            <label>Коментарі до замовлення:</label>
+            <textarea name="comments" rows="4" cols="50" placeholder="Введіть ваші коментарі або особливі побажання..."></textarea>
+        </div>
+
+        <!-- Контактна інформація -->
+        <div class="form-section">
+            <div class="section-title">Контактна інформація</div>
+            
+            <label>Електронна пошта для підтвердження:</label>
+            <input type="text" name="contact_email" size="30" placeholder="your@email.com">
+            
+            <label>Контактний телефон:</label>
+            <input type="text" name="contact_phone" size="20" placeholder="+38(0XX)XXX-XX-XX">
+        </div>
+
+        <!-- Кнопки -->
+        <div class="form-section">
+            <input type="submit" value="Підтвердити замовлення">
+            <input type="reset" value="Скасувати замовлення">
+            <input type="button" value="Довідка" onclick="alert('Для замовлення заповніть усі обов'язкові поля та оберіть бажані товари.')">
+        </div>
+    </form>
+</body>
+</html>

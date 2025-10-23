@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №7 - Завдання 3</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea { 
+            width: 300px; padding: 5px; 
+        }
+        .radio-group, .checkbox-group { margin-left: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Анкета користувача</h2>
+    
+    <form action="result.html" method="post">
+        <!-- Особиста інформація -->
+        <div class="form-group">
+            <label>Прізвище, ім'я, по батькові:</label>
+            <input type="text" name="fullname" required size="40">
+        </div>
+
+        <div class="form-group">
+            <label>Дата народження:</label>
+            <input type="text" name="birthdate" placeholder="дд.мм.рррр" size="15">
+        </div>
+
+        <div class="form-group">
+            <label>Стать:</label>
+            <div class="radio-group">
+                <input type="radio" name="gender" value="male"> Чоловіча<br>
+                <input type="radio" name="gender" value="female"> Жіноча
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Освіта:</label>
+            <select name="education" size="1">
+                <option value="secondary">Середня</option>
+                <option value="professional">Професійно-технічна</option>
+                <option value="incomplete_higher">Неповна вища</option>
+                <option value="higher">Вища</option>
+                <option value="scientific">Науковий ступінь</option>
+            </select>
+        </div>
+
+        <!-- Контактна інформація -->
+        <div class="form-group">
+            <label>Адреса електронної пошти:</label>
+            <input type="email" name="email" size="30">
+        </div>
+
+        <div class="form-group">
+            <label>Номер телефону:</label>
+            <input type="tel" name="phone" placeholder="+38(0XX)XXX-XX-XX" size="20">
+        </div>
+
+        <div class="form-group">
+            <label>Поштова адреса:</label>
+            <textarea name="address" cols="40" rows="3" placeholder="Індекс, область, місто, вулиця, будинок, квартира"></textarea>
+        </div>
+
+        <!-- Додаткова інформація -->
+        <div class="form-group">
+            <label>Досвід роботи (років):</label>
+            <input type="text" name="experience" size="5">
+        </div>
+
+        <div class="form-group">
+            <label>Мови, якими володієте:</label>
+            <div class="checkbox-group">
+                <input type="checkbox" name="languages" value="ukrainian"> Українська<br>
+                <input type="checkbox" name="languages" value="russian"> Російська<br>
+                <input type="checkbox" name="languages" value="english"> Англійська<br>
+                <input type="checkbox" name="languages" value="german"> Німецька<br>
+                <input type="checkbox" name="languages" value="french"> Французька<br>
+                <input type="checkbox" name="languages" value="other"> Інша
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Навички роботи з комп'ютером:</label>
+            <textarea name="computer_skills" cols="40" rows="4" placeholder="Опишіть ваші навички роботи з ПК..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Додаткова інформація:</label>
+            <textarea name="additional_info" cols="40" rows="4" placeholder="Будь-яка додаткова інформація про себе..."></textarea>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="form-group">
+            <input type="submit" value="Зареєструватися">
+            <input type="reset" value="Очистити форму">
+        </div>
+    </form>
+</body>
+</html>

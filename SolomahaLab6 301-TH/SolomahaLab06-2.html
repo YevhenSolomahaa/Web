@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Карта зі спливаючими заголовками</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px auto;
+        }
+        #customTooltip {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        img {
+            border: 2px solid #333;
+            cursor: pointer;
+            display: block;
+        }
+        .debug-info {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+        area {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Карта зі спливаючими заголовками</h2>
+    <p>Наведіть курсор на різні частини зображення</p>
+
+    <div class="image-container">
+        <map name="map2">
+            <!-- ВИПРАВЛЕНІ КООРДИНАТИ ДЛЯ 600x560 -->
+            <area shape="rect" coords="0,0,600,100" href="#" 
+                   onmouseover="showTooltip('Блакитне небо')" 
+                   onmouseout="hideTooltip()"
+                   onclick="return false;">
+            
+            <area shape="poly" coords="250,360,420,360,300,300" href="#" 
+                   onmouseover="showTooltip('Водоспад')" 
+                   onmouseout="hideTooltip()"
+                   onclick="return false;">
+            
+            <area shape="poly" coords="0,40,100,40,60,280,0,240,0,40" href="#" 
+                   onmouseover="showTooltip('Скеля')" 
+                   onmouseout="hideTooltip()"
+                   onclick="return false;">
+            
+            <area shape="circle" coords="150,470,50" href="#" 
+                   onmouseover="showTooltip('Рудник')" 
+                   onmouseout="hideTooltip()"
+                   onclick="return false;">
+        </map>
+
+        <img src="Foto/vodopad.jpg" width="600" height="560" usemap="#map2" alt="Пейзаж з різними об'єктами">
+
+        <div id="customTooltip"></div>
+    </div>
+
+    <div class="debug-info">
+        <strong>Області для тестування:</strong><br>
+        • Верхня частина (0,0-600,100) - <strong>Блакитне небо</strong><br>
+        • Трикутник у центрі - <strong>Водоспад</strong><br>
+        • Ліва сторона - <strong>Скеля</strong><br>
+        • Нижній лівий кут - <strong>Рудник</strong>
+    </div>
+
+    <script>
+        let currentTooltip = '';
+
+        function showTooltip(text) {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+            currentTooltip = text;
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.style.display = 'none';
+            currentTooltip = '';
+        }
+
+        // Відслідковуємо рух миші по всьому документу
+        document.addEventListener('mousemove', function(event) {
+            const tooltip = document.getElementById('customTooltip');
+            if (tooltip.style.display === 'block') {
+                tooltip.style.left = (event.clientX + 15) + 'px';
+                tooltip.style.top = (event.clientY + 15) + 'px';
+            }
+        });
+
+        // Додаємо просту перевірку кліку для тесту
+        document.querySelector('img').addEventListener('click', function(event) {
+            alert('Клікнуто на зображення! Координати: ' + event.offsetX + ',' + event.offsetY);
+        });
+
+        console.log('Карта завантажена. Координати адаптовані для 600x560');
+    </script>
+</body>
+</html>

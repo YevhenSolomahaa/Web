@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя Батьківщина - Україна</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 { 
+            color: #1565c0; 
+            text-align: center; 
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .image-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: 1px solid #e3f2fd;
+        }
+        .image-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .image-container { 
+            text-align: center; 
+            margin: 25px 0;
+        }
+        .multiple-images {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        img { 
+            border: 4px solid #1976d2;
+            border-radius: 12px;
+            margin: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.08);
+            border-color: #ff6f00;
+        }
+        h3 { 
+            color: #1976d2; 
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #ff6f00;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .description {
+            text-align: center;
+            color: #546e7a;
+            font-size: 1.2em;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+        .tooltip-info {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 5px solid #ff6f00;
+            font-size: 1.1em;
+        }
+        .custom-tooltip {
+            position: fixed;
+            background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            white-space: nowrap;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            border: 2px solid #ff6f00;
+        }
+        .photo-title {
+            font-weight: bold;
+            color: #1976d2;
+            margin-top: 15px;
+            font-size: 1.3em;
+            background: #e3f2fd;
+            padding: 8px 15px;
+            border-radius: 25px;
+            display: inline-block;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        area {
+            cursor: pointer;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section-header">
+            <h2>🇺🇦 Моя Батьківщина - Україна 🇺🇦</h2>
+            <p class="description">Відкрийте для себе красу та багатство українських земель</p>
+        </div>
+        
+        <!-- Карта України -->
+        <div class="image-section">
+            <h3> Карта України</h3>
+            <p class="description">Україна - європейська держава з багатовіковою історією та унікальною культурою</p>
+            
+            <map name="ukraineMap">
+                <area shape="rect" coords="50,50,150,120" href="#" 
+                       onmouseover="showCustomTooltip('Київ - столиця України')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="circle" coords="250,180,40" href="#" 
+                       onmouseover="showCustomTooltip('Полтавська область - серце України')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="poly" coords="100,200,180,150,220,200,150,250" href="#" 
+                       onmouseover="showCustomTooltip('Львівська область - культурна перлина')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="poly" coords="400,280,480,280,440,350" href="#" 
+                       onmouseover="showCustomTooltip('Чернівецька область - Буковина')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="poly" coords="300,100,380,100,340,180" href="#" 
+                       onmouseover="showCustomTooltip('Рівненська область - Полісся')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="rect" coords="450,150,550,220" href="#" 
+                       onmouseover="showCustomTooltip('Одеська область - морські ворота')" 
+                       onmouseout="hideCustomTooltip()">
+            </map>
+
+            <div class="image-container">
+                <img src="Foto/ukraine_map.jpg" width="600" height="400" alt="Карта України" usemap="#ukraineMap">
+            </div>
+            
+            <div class="tooltip-info">
+                <strong>🔍 Наведіть курсор на області України:</strong><br>
+                • Київ • Полтавщина • Львівщина • Чернівці • Рівненщина • Одещина
+            </div>
+        </div>
+
+        <!-- Київ -->
+        <div class="image-section">
+            <h3> Київ - столиця України</h3>
+            <p class="description">Місто-герой з тисячолітньою історією, духовний та політичний центр України</p>
+            
+            <map name="kyivMap">
+                <area shape="rect" coords="30,30,180,120" href="#" 
+                       onmouseover="showCustomTooltip('Софійський собор - памʼятка ЮНЕСКО')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="circle" coords="300,150,50" href="#" 
+                       onmouseover="showCustomTooltip('Майдан Незалежності - серце міста')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="poly" coords="400,200,500,200,450,280" href="#" 
+                       onmouseover="showCustomTooltip('Річка Дніпро - найбільша річка України')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="rect" coords="450,50,550,150" href="#" 
+                       onmouseover="showCustomTooltip('Києво-Печерська лавра')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="poly" coords="200,250,280,250,240,320" href="#" 
+                       onmouseover="showCustomTooltip('Родина-мати - національний символ')" 
+                       onmouseout="hideCustomTooltip()">
+            </map>
+
+            <div class="image-container">
+                <img src="Foto/kyiv.jpg" width="600" height="400" alt="Київ" usemap="#kyivMap">
+            </div>
+            
+            <div class="tooltip-info">
+                <strong> Визначні пам'ятки Києва:</strong><br>
+                • Софійський собор XI століття • Майдан Незалежності • Дніпро • Києво-Печерська лавра • Монумент "Батьківщина-мати"
+            </div>
+        </div>
+
+        <!-- Львів -->
+        <div class="image-section">
+            <h3> Львів - культурна столиця</h3>
+            <p class="description">Місто з унікальною архітектурою, багатою історією та європейським шармом</p>
+            
+            <map name="lvivMap">
+                <area shape="rect" coords="40,40,200,150" href="#" 
+                       onmouseover="showCustomTooltip('Старе місто - спадщина ЮНЕСКО')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="circle" coords="350,120,45" href="#" 
+                       onmouseover="showCustomTooltip('Площа Ринок - історичний центр')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="poly" coords="450,80,520,80,485,150" href="#" 
+                       onmouseover="showCustomTooltip('Високий замок - панорамний вид')" 
+                       onmouseout="hideCustomTooltip()">
+                <area shape="poly" coords="480,220,550,220,515,290" href="#" 
+                       onmouseover="showCustomTooltip('Личаківський цвинтар - музей')" 
+                       onmouseout="hideCustomTooltip()">
+            </map>
+
+            <div class="image-container">
+                <img src="Foto/lviv.jpg" width="600" height="400" alt="Львів" usemap="#lvivMap">
+            </div>
+            
+            <div class="tooltip-info">
+                <strong>🎭 Унікальні місця Львова:</strong><br>
+                • Старе місто (ЮНЕСКО) • Площа Ринок • Високий замок • Личаківське кладовище • Оперний театр
+            </div>
+        </div>
+
+        <!-- Природні краєвиди України -->
+        <div class="image-section">
+            <h3> Природні багатства України</h3>
+            <p class="description">Україна вражає різноманіттям природних ландшафтів та унікальними заповідними територіями</p>
+            
+            <div class="multiple-images">
+                <!-- Карпати -->
+                <div class="image-container">
+                    <map name="carpathiansMap">
+                        <area shape="rect" coords="20,20,180,120" href="#" 
+                               onmouseover="showCustomTooltip('Гора Говерла (2061 м) - найвища точка')" 
+                               onmouseout="hideCustomTooltip()">
+                        <area shape="circle" coords="280,100,35" href="#" 
+                               onmouseover="showCustomTooltip('Букові праліси Карпат')" 
+                               onmouseout="hideCustomTooltip()">
+                        <area shape="poly" coords="150,180,230,180,190,100" href="#" 
+                               onmouseover="showCustomTooltip('Карпатські полонини')" 
+                               onmouseout="hideCustomTooltip()">
+                    </map>
+                    <img src="Foto/carpathians.jpg" width="400" height="300" alt="Карпати" usemap="#carpathiansMap">
+                    <div class="photo-title"> Карпатські гори</div>
+                </div>
+
+                <!-- Чорне море -->
+                <div class="image-container">
+                    <map name="seaMap">
+                        <area shape="rect" coords="30,30,200,100" href="#" 
+                               onmouseover="showCustomTooltip('Чорне море - курортний регіон')" 
+                               onmouseout="hideCustomTooltip()">
+                        <area shape="circle" coords="280,180,40" href="#" 
+                               onmouseover="showCustomTooltip('Морські курорти')" 
+                               onmouseout="hideCustomTooltip()">
+                        <area shape="poly" coords="350,60,420,60,385,130" href="#" 
+                               onmouseover="showCustomTooltip('Портова інфраструктура')" 
+                               onmouseout="hideCustomTooltip()">
+                    </map>
+                    <img src="Foto/black_sea.jpg" width="400" height="300" alt="Чорне море" usemap="#seaMap">
+                    <div class="photo-title"> Чорне море</div>
+                </div>
+
+                <!-- Каньйон -->
+                <div class="image-container">
+                    <map name="canyonMap">
+                        <area shape="rect" coords="40,120,190,220" href="#" 
+                               onmouseover="showCustomTooltip('Дністровський каньйон')" 
+                               onmouseout="hideCustomTooltip()">
+                        <area shape="circle" coords="280,80,30" href="#" 
+                               onmouseover="showCustomTooltip('Скельні утвори')" 
+                               onmouseout="hideCustomTooltip()">
+                        <area shape="poly" coords="320,40,380,40,350,100" href="#" 
+                               onmouseover="showCustomTooltip('Річка Дністер')" 
+                               onmouseout="hideCustomTooltip()">
+                    </map>
+                    <img src="Foto/canyon.jpg" width="400" height="300" alt="Дністровський каньйон" usemap="#canyonMap">
+                    <div class="photo-title"> Дністровський каньйон</div>
+                </div>
+            </div>
+            
+            <div class="tooltip-info">
+                <strong> Унікальні природні об'єкти:</strong><br>
+                • <strong>Карпати</strong> - гірський масив з об'єктами ЮНЕСКО<br>
+                • <strong>Чорне море</strong> - важливий транспортний та курортний регіон<br>
+                • <strong>Дністровський каньйон</strong> - геологічна пам'ятка природи
+            </div>
+        </div>
+    </div>
+
+    <div id="customTooltip" class="custom-tooltip"></div>
+
+    <script>
+        function showCustomTooltip(text) {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+        }
+
+        function hideCustomTooltip() {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.style.display = 'none';
+        }
+
+        document.addEventListener('mousemove', function(event) {
+            const tooltip = document.getElementById('customTooltip');
+            if (tooltip.style.display === 'block') {
+                tooltip.style.left = (event.clientX + 25) + 'px';
+                tooltip.style.top = (event.clientY + 25) + 'px';
+            }
+        });
+
+        // Автовиправлення помилок у шляхах
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            const corrections = {
+                'lviv.jng': 'lviv.jpg',
+                'lviv.png': 'lviv.jpg',
+                'kyiv.jng': 'kyiv.jpg'
+            };
+            
+            images.forEach(img => {
+                for (const [wrong, correct] of Object.entries(corrections)) {
+                    if (img.src.includes(wrong)) {
+                        img.src = img.src.replace(wrong, correct);
+                        break;
+                    }
+                }
+            });
+            
+            console.log(' Сторінка "Моя Батьківщина" завантажена успішно!');
+        });
+    </script>
+</body>
+</html>

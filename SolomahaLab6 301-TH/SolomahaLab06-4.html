@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Навігаційна карта сайту</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            color: #333;
+        }
+        h1 { color: #2c3e50; margin-bottom: 30px; }
+        .nav-image { 
+            margin: 30px 0; 
+            position: relative;
+        }
+        img { 
+            border: 5px solid #3498db;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        .info { 
+            margin-top: 30px; 
+            padding: 20px; 
+            background: #e3f2fd;
+            border-radius: 10px;
+        }
+        .custom-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 16px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .demo-content {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Навігаційна карта сайту</h1>
+        <p>Наведіть курсор на геометричні фігури для навігації</p>
+        
+        <!-- КАРТА З ДЕМО-ПОСИЛАННЯМИ -->
+        <map name="navMap">
+            <!-- КОЛО - Домашня сторінка -->
+            <area shape="circle" coords="150,150,80" 
+                   href="javascript:void(0)"
+                   onmouseover="showTooltip(' Домашня сторінка - SolomahaLab01-1.html')"
+                   onmouseout="hideTooltip()"
+                   onclick="showDemo('home')">
+            
+            <!-- ПРЯМОКУТНИК - Гіперпосилання -->
+            <area shape="rect" coords="250,80,450,220" 
+                   href="javascript:void(0)"
+                   onmouseover="showTooltip(' Мої гіперпосилання - SolomahaLab05-3.html')"
+                   onmouseout="hideTooltip()"
+                   onclick="showDemo('links')">
+            
+            <!-- ТРИКУТНИК - Батьківщина -->
+            <area shape="poly" coords="500,150,600,80,600,220" 
+                   href="javascript:void(0)"
+                   onmouseover="showTooltip('🇺🇦 Моя Батьківщина - SolomahaLab06-3.html')"
+                   onmouseout="hideTooltip()"
+                   onclick="showDemo('homeland')">
+            
+            <!-- РОМБ - Додаткова інформація -->
+            <area shape="poly" coords="350,300,430,250,510,300,430,350" 
+                   href="javascript:void(0)"
+                   onmouseover="showTooltip('ℹ Додаткова інформація')"
+                   onmouseout="hideTooltip()"
+                   onclick="showDemo('info')">
+        </map>
+
+        <!-- ЗОБРАЖЕННЯ -->
+        <div class="nav-image">
+            <img src="Foto/navigation_map.jpg" width="700" height="450" 
+                 alt="Навігаційна карта" usemap="#navMap">
+            <div id="customTooltip" class="custom-tooltip"></div>
+        </div>
+
+        <!-- ДЕМО-КОНТЕНТ, ЯКИЙ ПОКАЗУЄТЬСЯ ПРИ КЛІКУ -->
+        <div id="demoContent" class="demo-content">
+            <h3 id="demoTitle">Демо-контент</h3>
+            <div id="demoText"></div>
+            <button onclick="hideDemo()" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Закрити
+            </button>
+        </div>
+
+        <!-- ІНФОРМАЦІЯ -->
+        <div class="info">
+            <h3> Як це працює:</h3>
+            <p>• <strong>Наведіть курсор</strong> на фігуру - побачите підказку</p>
+            <p>• <strong>Клікніть на фігуру</strong> - побачите демо-контент</p>
+            <p>• <strong>У реальному сайті</strong> замість демо будуть реальні посилання</p>
+            
+        </div>
+    </div>
+
+    <script>
+        // Функції для спливаючих підказок
+        function showTooltip(text) {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('customTooltip');
+            tooltip.style.display = 'none';
+        }
+
+        // Відслідковуємо рух миші
+        document.addEventListener('mousemove', function(event) {
+            const tooltip = document.getElementById('customTooltip');
+            if (tooltip.style.display === 'block') {
+                tooltip.style.left = (event.clientX + 20) + 'px';
+                tooltip.style.top = (event.clientY + 20) + 'px';
+            }
+        });
+
+        // Функції для демо-контенту
+        function showDemo(type) {
+            const demoContent = document.getElementById('demoContent');
+            const demoTitle = document.getElementById('demoTitle');
+            const demoText = document.getElementById('demoText');
+            
+            const demos = {
+                home: {
+                    title: ' Домашня сторінка',
+                    text: 'Це демонстрація роботи посилання на домашню сторінку.<br>У реальному сайті тут буде файл: <strong>SolomahaLab01-1.html</strong>'
+                },
+                links: {
+                    title: ' Мої гіперпосилання',
+                    text: 'Це демонстрація роботи посилання на сторінку з гіперпосиланнями.<br>У реальному сайті тут буде файл: <strong>SolomahaLab05-3.html</strong>'
+                },
+                homeland: {
+                    title: 'Моя Батьківщина',
+                    text: 'Це демонстрація роботи посилання на сторінку про Батьківщину.<br>У реальному сайті тут буде файл: <strong>SolomahaLab06-3.html</strong>'
+                },
+                info: {
+                    title: ' Додаткова інформація',
+                    text: 'Це демонстраційний контент для додаткової інформації.<br>Тут може бути будь-який додатковий матеріал.'
+                }
+            };
+            
+            demoTitle.textContent = demos[type].title;
+            demoText.innerHTML = demos[type].text;
+            demoContent.style.display = 'block';
+            
+            // Прокручуємо до демо-контенту
+            demoContent.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideDemo() {
+            document.getElementById('demoContent').style.display = 'none';
+        }
+
+        // Автоматичне тестування при завантаженні
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log(' Навігаційна карта завантажена успішно!');
+            console.log(' Тестуйте: наведіть курсор на фігури та клікайте на них');
+        });
+    </script>
+</body>
+</html>
