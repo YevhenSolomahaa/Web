@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header, .nav, .content, .sidebar, .footer {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+/* Flexbox layout */
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nav {
+    flex: 1;
+    background-color: lightblue;
+    order: 1;
+}
+
+.content {
+    flex: 2;
+    background-color: lightcoral;
+    order: 2;
+}
+
+.sidebar {
+    flex: 1;
+    background-color: lightgreen;
+    order: 3;
+}
+
+.footer {
+    background-color: lightgray;
+    order: 4;
+}
+
+/* Media Queries для Flexbox */
+@media (max-width: 949px) {
+    .main-container {
+        flex-direction: column;
+    }
+    .nav, .content, .sidebar {
+        width: 100%;
+    }
+}
