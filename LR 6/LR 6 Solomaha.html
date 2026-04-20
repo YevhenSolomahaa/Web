@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота: Об'єкти в JavaScript</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .task {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Лабораторне заняття №6</h1>
+    <p><strong>Тема:</strong> Практика роботи з об'єктами в мові програмування JavaScript</p>
+
+    <!-- Завдання 1 -->
+    <div class="task">
+        <h2>Завдання 1. Визначення дня тижня залежно від мови</h2>
+        <button id="runTask1">Запустити завдання 1</button>
+        <div id="task1Output" class="output" style="display:none;"></div>
+    </div>
+
+    <!-- Завдання 2 -->
+    <div class="task">
+        <h2>Завдання 2. Електрична мережа (ООП)</h2>
+        <button id="runTask2">Розрахувати баланс електромережі</button>
+        <div id="task2Output" class="output" style="display:none;"></div>
+    </div>
+
+    <script>
+        // ==============================================
+        // ЗАВДАННЯ 1: Визначення дня тижня з об'єктом мови
+        // ==============================================
+        
+        // Єдиний об'єкт, що містить всю інформацію про мови та дні тижня
+        const languageData = {
+            ua: {
+                weekDays: {
+                    1: "Понеділок",
+                    2: "Вівторок",
+                    3: "Середа",
+                    4: "Четвер",
+                    5: "П'ятниця",
+                    6: "Субота",
+                    7: "Неділя"
+                },
+                messages: {
+                    askLanguage: "Виберіть мову (ua або en):",
+                    invalidLanguage: "Неправильний ввід. Будь ласка, введіть 'ua' або 'en'.",
+                    askDayNumber: "Введіть номер дня тижня від 1 до 7:",
+                    invalidDay: "Неправильний номер. Введіть число від 1 до 7."
+                }
+            },
+            en: {
+                weekDays: {
+                    1: "Monday",
+                    2: "Tuesday",
+                    3: "Wednesday",
+                    4: "Thursday",
+                    5: "Friday",
+                    6: "Saturday",
+                    7: "Sunday"
+                },
+                messages: {
+                    askLanguage: "Select language (ua or en):",
+                    invalidLanguage: "Invalid input. Please enter 'ua' or 'en'.",
+                    askDayNumber: "Enter the day number of the week (from 1 to 7):",
+                    invalidDay: "Invalid number. Please enter a number from 1 to 7."
+                }
+            }
+        };
+
+        // Функція для вибору мови (незалежно від регістру)
+        function selectLanguage() {
+            let lang = null;
+            while (!lang) {
+                let input = prompt(languageData.en.messages.askLanguage); // спочатку англійською, але підтримує обидві
+                if (input === null) return null; // якщо скасував
+                let lowerInput = input.trim().toLowerCase();
+                if (lowerInput === 'ua' || lowerInput === 'en') {
+                    lang = lowerInput;
+                } else {
+                    alert(languageData.en.messages.invalidLanguage);
+                }
+            }
+            return lang;
+        }
+
+        // Функція для отримання номера дня тижня з повідомленням потрібною мовою
+        function getDayNumber(langCode) {
+            const messages = languageData[langCode].messages;
+            let dayNum = null;
+            while (dayNum === null) {
+                let input = prompt(messages.askDayNumber);
+                if (input === null) return null;
+                let num = parseInt(input, 10);
+                if (!isNaN(num) && num >= 1 && num <= 7) {
+                    dayNum = num;
+                } else {
+                    alert(messages.invalidDay);
+                }
+            }
+            return dayNum;
+        }
+
+        // Головна функція для запуску завдання 1
+        function runTask1() {
+            // Крок 1: вибір мови
+            const lang = selectLanguage();
+            if (!lang) {
+                alert("Операцію скасовано.");
+                return;
+            }
+            
+            // Крок 2: отримання номера дня
+            const dayNumber = getDayNumber(lang);
+            if (!dayNumber) {
+                alert("Операцію скасовано.");
+                return;
+            }
+            
+            // Крок 3: отримання назви дня з об'єкта
+            const dayName = languageData[lang].weekDays[dayNumber];
+            
+            // Виведення результату
+            const resultMessage = `Мова: ${lang.toUpperCase()}\nНомер дня: ${dayNumber}\nДень тижня: ${dayName}`;
+            alert(resultMessage);
+            
+            // Відображення результату на сторінці
+            const outputDiv = document.getElementById('task1Output');
+            outputDiv.style.display = 'block';
+            outputDiv.innerHTML = `<strong>Результат завдання 1:</strong><br>${resultMessage.replace(/\n/g, '<br>')}`;
+        }
+
+        // ЗАВДАННЯ 2: Електрична мережа (ООП)
+        
+        // Базовий клас для елементів мережі
+        class EnergyUnit {
+            constructor(name) {
+                this.name = name;
+            }
+            // Методи для отримання генерації/споживання вдень та вночі
+            getDayPower() { return 0; }
+            getNightPower() { return 0; }
+        }
+
+        // Електростанція (генерує потужність від 1 до 100 МВт)
+        class PowerPlant extends EnergyUnit {
+            constructor(name, powerMW) {
+                super(name);
+                this.powerMW = Math.min(100, Math.max(1, powerMW)); // від 1 до 100
+            }
+            getDayPower() { return this.powerMW; }
+            getNightPower() { return this.powerMW; }
+        }
+
+        // Сонячна панель (генерує 1-5 МВт вдень, 0 вночі)
+        class SolarPanel extends EnergyUnit {
+            constructor(name, dayGenerationMW) {
+                super(name);
+                this.dayGenerationMW = Math.min(5, Math.max(1, dayGenerationMW));
+            }
+            getDayPower() { return this.dayGenerationMW; }
+            getNightPower() { return 0; }
+        }
+
+        // Житловий будинок (споживає 4 кВт/квартиру вдень, 1 кВт вночі)
+        class ResidentialBuilding extends EnergyUnit {
+            constructor(name, apartments) {
+                super(name);
+                this.apartments = Math.min(400, Math.max(1, apartments));
+                // Перетворюємо кВт в МВт (1 МВт = 1000 кВт)
+            }
+            getDayPower() { 
+                // вдень: 4 кВт на квартиру = 0.004 МВт на квартиру
+                return - (this.apartments * 0.004); // від'ємне значення = споживання
+            }
+            getNightPower() {
+                // вночі: 1 кВт на квартиру = 0.001 МВт на квартиру
+                return - (this.apartments * 0.001);
+            }
+        }
+
+        // Лінія електропередачі
+        class PowerLine extends EnergyUnit {
+            constructor(name, maxCapacityMW, pricePerMW) {
+                super(name);
+                this.maxCapacityMW = maxCapacityMW;   // максимальна пропускна здатність МВт
+                this.pricePerMW = pricePerMW;         // ціна за МВт (додатна - дохід при продажу, від'ємна - витрати при купівлі)
+            }
+            getDayPower() { return 0; } // лінія не генерує і не споживає, тільки передає
+            getNightPower() { return 0; }
+            getMaxCapacity() { return this.maxCapacityMW; }
+            getPrice() { return this.pricePerMW; }
+        }
+
+        // Клас для управління електромережею
+        class EnergyNetwork {
+            constructor() {
+                this.elements = []; // всі елементи мережі
+                this.powerLines = []; // окремо лінії для передачі
+            }
+            
+            addElement(element) {
+                this.elements.push(element);
+                if (element instanceof PowerLine) {
+                    this.powerLines.push(element);
+                }
+            }
+            
+            // Розрахунок чистого балансу (генерація + споживання) для певного періоду
+            calculateBalance(period) {
+                let totalPower = 0;
+                for (let elem of this.elements) {
+                    if (period === 'day') {
+                        totalPower += elem.getDayPower();
+                    } else {
+                        totalPower += elem.getNightPower();
+                    }
+                }
+                return totalPower; // додатнє - надлишок, від'ємне - дефіцит
+            }
+            
+            // Оптимізація використання ліній для покриття дефіциту або продажу надлишку
+            optimizeAndCost(period) {
+                let balance = this.calculateBalance(period);
+                let remainingBalance = balance;
+                let totalCost = 0;
+                let totalExchanged = 0;
+                
+                // Якщо баланс нульовий - нічого не треба
+                if (Math.abs(remainingBalance) < 0.0001) {
+                    return { needed: 0, surplus: 0, cost: 0, details: "Баланс ідеальний, обмін не потрібен." };
+                }
+                
+                // Сортуємо лінії за ціною: якщо дефіцит (купуємо) - вигідніше купувати за меншою ціною
+                // Якщо надлишок (продаємо) - вигідніше продавати за вищою ціною
+                let sortedLines = [...this.powerLines].sort((a, b) => a.getPrice() - b.getPrice());
+                
+                if (remainingBalance < 0) {
+                    // ДЕФІЦИТ: потрібно купити енергію (negative balance)
+                    let needed = -remainingBalance;
+                    let remainingNeed = needed;
+                    let totalPurchaseCost = 0;
+                    let purchased = 0;
+                    
+                    for (let line of sortedLines) {
+                        if (remainingNeed <= 0) break;
+                        let availableCapacity = line.getMaxCapacity();
+                        let take = Math.min(availableCapacity, remainingNeed);
+                        if (take > 0) {
+                            let price = line.getPrice(); // ціна покупки (додатня вартість)
+                            totalPurchaseCost += take * price;
+                            purchased += take;
+                            remainingNeed -= take;
+                        }
+                    }
+                    
+                    if (remainingNeed > 0.0001) {
+                        return { needed: needed, surplus: 0, cost: totalPurchaseCost, 
+                                 details: `Увага! Не вистачає потужності ліній для покриття всього дефіциту. Покрито ${purchased.toFixed(2)} МВт з ${needed.toFixed(2)} МВт.` };
+                    }
+                    return { needed: needed, surplus: 0, cost: totalPurchaseCost, 
+                             details: `Дефіцит: ${needed.toFixed(2)} МВт. Закуплено за ${totalPurchaseCost.toFixed(2)} грн.` };
+                } 
+                else {
+                    // НАДЛИШОК: можна продати
+                    let surplus = remainingBalance;
+                    let remainingSurplus = surplus;
+                    let totalRevenue = 0;
+                    let sold = 0;
+                    
+                    // Для продажу вигідніше використовувати лінії з найбільшою ціною (більший дохід)
+                    let descSortedLines = [...this.powerLines].sort((a, b) => b.getPrice() - a.getPrice());
+                    
+                    for (let line of descSortedLines) {
+                        if (remainingSurplus <= 0) break;
+                        let availableCapacity = line.getMaxCapacity();
+                        let send = Math.min(availableCapacity, remainingSurplus);
+                        if (send > 0) {
+                            let price = line.getPrice();
+                            totalRevenue += send * price;
+                            sold += send;
+                            remainingSurplus -= send;
+                        }
+                    }
+                    
+                    if (remainingSurplus > 0.0001) {
+                        return { needed: 0, surplus: surplus, cost: -totalRevenue, 
+                                 details: `Увага! Надлишок ${surplus.toFixed(2)} МВт, але продано лише ${sold.toFixed(2)} МВт через обмеження ліній.` };
+                    }
+                    return { needed: 0, surplus: surplus, cost: -totalRevenue, 
+                             details: `Надлишок: ${surplus.toFixed(2)} МВт. Продано, отримано прибуток ${totalRevenue.toFixed(2)} грн.` };
+                }
+            }
+            
+            // Повний аналіз для дня і ночі
+            fullAnalysis() {
+                const periods = ['day', 'night'];
+                const periodNames = { day: 'День', night: 'Ніч' };
+                let result = '';
+                
+                for (let period of periods) {
+                    let balance = this.calculateBalance(period);
+                    let analysis = this.optimizeAndCost(period);
+                    result += `<strong>${periodNames[period]}:</strong><br>`;
+                    result += `Баланс: ${balance.toFixed(2)} МВт (${balance >= 0 ? 'надлишок' : 'дефіцит'})<br>`;
+                    result += `${analysis.details}<br>`;
+                    if (analysis.needed > 0) {
+                        result += `Необхідно закупити: ${analysis.needed.toFixed(2)} МВт<br>`;
+                        result += `Вартість закупівлі: ${analysis.cost.toFixed(2)} грн<br>`;
+                    } else if (analysis.surplus > 0) {
+                        result += `Можна продати: ${analysis.surplus.toFixed(2)} МВт<br>`;
+                        result += `Прибуток від продажу: ${(-analysis.cost).toFixed(2)} грн<br>`;
+                    } else {
+                        result += `Вартість/прибуток: ${analysis.cost.toFixed(2)} грн<br>`;
+                    }
+                    result += `<br>`;
+                }
+                return result;
+            }
+        }
+        
+        // Функція для демонстрації роботи завдання 2
+        function runTask2() {
+            // Створюємо мережу
+            const network = new EnergyNetwork();
+            
+            // Додаємо електростанції (назва, потужність МВт)
+            network.addElement(new PowerPlant("ТЕС-1", 45));
+            network.addElement(new PowerPlant("АЕС-2", 85));
+            
+            // Додаємо сонячні панелі (назва, генерація вдень МВт)
+            network.addElement(new SolarPanel("Сонячна ферма Південь", 4.5));
+            network.addElement(new SolarPanel("Дахова СЕС", 2.2));
+            network.addElement(new SolarPanel("Парк сонячний", 3.8));
+            
+            // Додаємо житлові будинки (назва, кількість квартир)
+            network.addElement(new ResidentialBuilding("ЖК Сонячний", 320));
+            network.addElement(new ResidentialBuilding("ЖК Мирний", 180));
+            network.addElement(new ResidentialBuilding("ЖК Центральний", 95));
+            network.addElement(new ResidentialBuilding("Котеджне містечко", 45));
+            
+            // Додаємо лінії електропередач (назва, макс потужність МВт, ціна за МВт)
+            network.addElement(new PowerLine("Лінія 110 кВ - Захід", 30, 1.2));   // ціна за МВт (грн або у.о.)
+            network.addElement(new PowerLine("Лінія 330 кВ - Схід", 50, 0.95));
+            network.addElement(new PowerLine("Лінія міжнародна - Польща", 25, 1.45));
+            
+            // Виконуємо аналіз
+            const analysisResult = network.fullAnalysis();
+            
+            // Виводимо також детальний склад мережі
+            let elementsInfo = "<strong>Склад мережі:</strong><br>";
+            for (let elem of network.elements) {
+                if (elem instanceof PowerPlant) {
+                    elementsInfo += ` Електростанція: ${elem.name}, потужність: ${elem.powerMW} МВт (день/ніч)<br>`;
+                } else if (elem instanceof SolarPanel) {
+                    elementsInfo += ` Сонячна панель: ${elem.name}, генерація вдень: ${elem.dayGenerationMW} МВт, вночі: 0<br>`;
+                } else if (elem instanceof ResidentialBuilding) {
+                    elementsInfo += ` Житловий будинок: ${elem.name}, квартир: ${elem.apartments}, споживання вдень: ${(-elem.getDayPower()).toFixed(2)} МВт, вночі: ${(-elem.getNightPower()).toFixed(2)} МВт<br>`;
+                } else if (elem instanceof PowerLine) {
+                    elementsInfo += ` Лінія електропередач: ${elem.name}, макс. потужність: ${elem.maxCapacityMW} МВт, ціна за МВт: ${elem.pricePerMW} грн<br>`;
+                }
+            }
+            
+            const outputDiv = document.getElementById('task2Output');
+            outputDiv.style.display = 'block';
+            outputDiv.innerHTML = `<strong>Результат завдання 2 (ООП):</strong><br><br>${elementsInfo}<br><strong>Аналіз балансу:</strong><br>${analysisResult}`;
+        }
+        
+        // Прив'язка кнопок до функцій
+        document.getElementById('runTask1').addEventListener('click', runTask1);
+        document.getElementById('runTask2').addEventListener('click', runTask2);
+        
+        // Додаткове пояснення на сторінці
+        console.log("Лабораторна робота завантажена. Використовуйте кнопки для запуску завдань.");
+    </script>
+</body>
+</html>

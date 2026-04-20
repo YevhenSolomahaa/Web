@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Квадрат числа (AJAX)</title>
+</head>
+<body>
+<div style="border:1px solid #ccc; padding:15px; margin-bottom:20px; border-radius:10px; background:#f9f9f9;">
+    <h3>Лабораторна робота № 5: AJAX</h3>
+    
+    <p><b>Мета:</b> Ознайомлення з технологією AJAX та взаємодією клієнта і сервера.</p>
+    
+    <p><b>Що робить програма:</b><br>
+    - Приймає число від користувача<br>
+    - Надсилає його на сервер (без перезавантаження)<br>
+    - Отримує результат і відображає його
+    </p>
+    
+    <p><b>Як користуватись:</b><br>
+    1. Введіть число<br>
+    2. Натисніть "Обчислити"<br>
+    3. Отримайте квадрат числа
+    </p>
+</div>
+<h2>Обчислення квадрату числа</h2>
+
+<input type="number" id="numberInput" placeholder="Введіть число">
+<button onclick="sendNumber()">Обчислити</button>
+
+<p id="result"></p>
+
+<script>
+function sendNumber() {
+    let number = document.getElementById("numberInput").value;
+
+    fetch("http://localhost:3000/square", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ number: number })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("result").innerText = 
+            "Квадрат числа: " + data.result;
+    })
+    .catch(error => console.error(error));
+}
+</script>
+
+</body>
+</html>
