@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота - JavaScript</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .task {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .output {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .console-hint {
+            background-color: #2c3e50;
+            color: #2ecc71;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📚 Лабораторна робота №17</h1>
+    <p><strong>Тема:</strong> Практика роботи зі строковими даними в JavaScript</p>
+
+    <!-- ==================== ЗАВДАННЯ 1 ==================== -->
+    <div class="task">
+        <h2> Завдання 1: Поточний час у форматі</h2>
+        <p><strong>Формат:</strong> 09:15:56, середа, 06 травня 2025 року</p>
+        <button onclick="task1_showTime()"> Показати поточний час</button>
+        <div id="task1-output" class="output"></div>
+
+        <details>
+            <summary> Пояснення коду Завдання 1</summary>
+            <div class="output" style="margin-top: 10px;">
+                <strong>// Функція showCurrentTime()</strong><br>
+                1. <strong>new Date()</strong> - створює об'єкт дати з поточним моментом часу<br>
+                2. <strong>getHours(), getMinutes(), getSeconds()</strong> - отримуємо години, хвилини, секунди<br>
+                3. <strong>padStart(2, '0')</strong> - додає нуль спереду, якщо число менше 10 (наприклад, 9 → "09")<br>
+                4. <strong>Масив days[]</strong> - містить назви днів тижня українською мовою<br>
+                5. <strong>getDay()</strong> - повертає день тижня (0 = неділя, 1 = понеділок, ...)<br>
+                6. <strong>getDate(), getMonth(), getFullYear()</strong> - отримуємо число, місяць, рік<br>
+                7. <strong>getMonth() + 1</strong> - місяці в JS від 0 до 11, тому додаємо 1<br>
+                8. Виводимо рядок у шаблонному форматі з допомогою зворотних лапок `${}`<br>
+                9. <strong>console.log()</strong> - виводить у консоль браузера (F12)<br>
+                10. <strong>document.getElementById().innerHTML</strong> - виводить на сторінку
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== ЗАВДАННЯ 2 ==================== -->
+    <div class="task">
+        <h2> Завдання 2: Гра "Вгадай число"</h2>
+        <p><strong>Правила:</strong> Комп'ютер загадує число від 0 до 50. Ви маєте його вгадати.<br>
+        Підказки:  гаряче (різниця ≤5),  тепло (різниця ≤15),  холодно (різниця >15)<br>
+        Кожна спроба записується в консоль із часом.</p>
+        <button onclick="task2_startGame()"> Почати гру</button>
+        <div id="task2-output" class="output"></div>
+        
+        <details>
+            <summary> Пояснення коду Завдання 2</summary>
+            <div class="output" style="margin-top: 10px;">
+                <strong>// Основна функція guessTheNumber()</strong><br><br>
+                
+                <strong>1. Цикл while (playAgain)</strong> - дозволяє грати багато разів<br>
+                playAgain = true → граємо, false → вихід<br><br>
+                
+                <strong>2. Генерація числа:</strong> Math.random() → число 0..0.999, множимо на 51 → 0..50.999, Math.floor() → ціле 0..50<br><br>
+                
+                <strong>3. Внутрішній цикл while (!guessed)</strong> - поки не вгадано<br><br>
+                
+                <strong>4. prompt()</strong> - показує модальне вікно з полем вводу<br>
+                Якщо користувач натиснув Cancel → повертає null → виходимо з гри<br><br>
+                
+                <strong>5. Number(userInput)</strong> - перетворює рядок на число<br>
+                isNaN() перевіряє, чи це число (NaN = Not a Number)<br><br>
+                
+                <strong>6. Логування спроби в консоль:</strong><br>
+                new Date() → отримуємо час спроби<br>
+                Форматуємо дату: день.місяць.рік<br>
+                Форматуємо час: години:хвилини:секунди<br>
+                console.log() виводить у консоль браузера<br><br>
+                
+                <strong>7. Перевірка вгадування:</strong><br>
+                if (guess === secretNumber) → вгадав → alert з результатом<br>
+                guessed = true → вихід із внутрішнього циклу<br><br>
+                
+                <strong>8. Підказки:</strong><br>
+                Math.abs() → абсолютне значення різниці<br>
+                if (diff ≤ 5) → "гаряче"<br>
+                else if (diff ≤ 15) → "тепло"<br>
+                else → "холодно"<br><br>
+                
+                <strong>9. alert()</strong> - показує підказку<br><br>
+                
+                <strong>10. Після вгадування:</strong> confirm() → питає "Хочеш зіграти ще раз?"<br>
+                true → playAgain = true, false → playAgain = false
+            </div>
+        </details>
+        
+        <div class="console-hint">
+            💡 <strong>Підказка:</strong> Відкрий консоль браузера (F12 → вкладка Console), щоб побачити історію спроб!
+        </div>
+    </div>
+
+    <hr>
+    <h3> Як перевірити роботу?</h3>
+    <ol>
+        <li>Натисни F12 (або ПКМ → "Перевірити" / "Inspect")</li>
+        <li>Перейди на вкладку <strong>Console (Консоль)</strong></li>
+        <li>Натискай кнопки та спостерігай за виводом у консолі</li>
+    </ol>
+
+    <script>
+        // ==================== ЗАВДАННЯ 1 ====================
+        function showCurrentTime() {
+            // Створюємо об'єкт Date з поточним моментом часу
+            const now = new Date();
+            
+            // Отримуємо години, хвилини, секунди
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            
+            // padStart(2, '0') - додає нуль спереду, якщо число < 10
+            // Наприклад: 5 → "05", 12 → "12"
+            hours = hours.toString().padStart(2, '0');
+            minutes = minutes.toString().padStart(2, '0');
+            seconds = seconds.toString().padStart(2, '0');
+            
+            // Масив днів тижня українською (0 - неділя, 1 - понеділок, ...)
+            const days = ['неділя', 'понеділок', 'вівторок', 'середа', 'четвер', "п'ятниця", 'субота'];
+            const dayName = days[now.getDay()]; // getDay() повертає 0-6
+            
+            // Отримуємо число, місяць, рік
+            const day = now.getDate();
+            const month = now.getMonth() + 1; // +1 бо січень = 0
+            const year = now.getFullYear();
+            
+            // Форматуємо місяць з нулем спереду
+            const monthFormatted = month.toString().padStart(2, '0');
+            
+            // Формуємо фінальний рядок
+            const timeString = `${hours}:${minutes}:${seconds}, ${dayName}, ${day} ${monthFormatted} ${year} року`;
+            
+            // Виводимо в консоль (для перевірки завдання)
+            console.log(timeString);
+            
+            // Виводимо на сторінку
+            document.getElementById('task1-output').innerHTML = ` <strong>Поточний час:</strong> ${timeString}`;
+        }
+        
+        // Функція для кнопки (щоб викликати showCurrentTime)
+        function task1_showTime() {
+            showCurrentTime();
+        }
+        
+        // ==================== ЗАВДАННЯ 2 ====================
+        function guessTheNumber() {
+            let playAgain = true;  // Змінна для повторної гри
+            
+            // Зовнішній цикл - поки користувач хоче грати
+            while (playAgain) {
+                // Генеруємо випадкове число від 0 до 50
+                // Math.random() → 0..0.999..., множимо на 51 → 0..50.999, floor → 0..50
+                const secretNumber = Math.floor(Math.random() * 51);
+                let attempts = 0;      // Лічильник спроб
+                let guessed = false;   // Чи вгадано число
+                
+                // Внутрішній цикл - поки не вгадано
+                while (!guessed) {
+                    // Запитуємо число в користувача
+                    const userInput = prompt(" Вгадай число від 0 до 50:");
+                    
+                    // Якщо користувач натиснув "Скасувати" - виходимо з гри
+                    if (userInput === null) {
+                        return;
+                    }
+                    
+                    // Перетворюємо рядок на число
+                    const guess = Number(userInput);
+                    
+                    // Перевіряємо, чи введено коректне число
+                    if (isNaN(guess)) {
+                        alert("❌ Будь ласка, введи число!");
+                        continue;  // Пропускаємо цю ітерацію, не збільшуємо лічильник
+                    }
+                    
+                    // Збільшуємо лічильник спроб
+                    attempts++;
+                    
+                    // ===== ЛОГУВАННЯ В КОНСОЛЬ (формат: 02.03.2025 16:01:33 Спроба 1: число 23 – не вірно) =====
+                    const now = new Date();
+                    const day = now.getDate().toString().padStart(2, '0');
+                    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+                    const year = now.getFullYear();
+                    const hours = now.getHours().toString().padStart(2, '0');
+                    const minutes = now.getMinutes().toString().padStart(2, '0');
+                    const seconds = now.getSeconds().toString().padStart(2, '0');
+                    
+                    const dateTimeStr = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+                    console.log(`${dateTimeStr} Спроба ${attempts}: число ${guess} – не вірно`);
+                    
+                    // ===== ПЕРЕВІРКА, ЧИ ВГАДАВ =====
+                    if (guess === secretNumber) {
+                        // Виводимо повідомлення про перемогу
+                        alert(`🎉 За ${attempts} спроб ви вгадали число ${secretNumber}! 🎉`);
+                        guessed = true;  // Виходимо з внутрішнього циклу
+                    } else {
+                        // Обчислюємо різницю між загаданим числом і спробою
+                        const diff = Math.abs(guess - secretNumber);
+                        
+                        // Визначаємо підказку
+                        let hint = "";
+                        if (diff <= 5) {
+                            hint = "🔥 ГАРЯЧЕ! (різниця ≤ 5)";
+                        } else if (diff <= 15) {
+                            hint = "☀️ ТЕПЛО (різниця ≤ 15)";
+                        } else {
+                            hint = "❄️ ХОЛОДНО (різниця > 15)";
+                        }
+                        
+                        // Показуємо підказку
+                        alert(`❌ Не вгадав! ${hint}\n📊 Різниця: ${diff} одиниць від загаданого числа`);
+                    }
+                }
+                
+                // Після вгадування питаємо, чи хоче грати ще
+                playAgain = confirm("🎮 Хочеш зіграти ще раз?");
+            }
+            
+            // Прощальне повідомлення
+            console.log("Гру завершено. Дякую за гру!");
+        }
+        
+        // Функція для кнопки (щоб викликати guessTheNumber)
+        function task2_startGame() {
+            guessTheNumber();
+        }
+        
+        // Додаткове пояснення в консолі при завантаженні сторінки
+        console.log("✅ Сторінка завантажена! Готовий до виконання завдань.");
+        console.log("📌 Завдання 1: натисни кнопку 'Показати поточний час'");
+        console.log("🎮 Завдання 2: натисни кнопку 'Почати гру'");
+    </script>
+</body>
+</html>
